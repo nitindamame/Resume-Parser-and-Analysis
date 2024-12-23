@@ -3,7 +3,7 @@ import os
 import pypdf
 from PIL import Image  
 from dotenv import load_dotenv
-from Models import get_HF_embeddings, cosine, get_doc2vec_embeddings
+from Models import cosine
 
 load_dotenv()  ## load all our environment variables
 
@@ -65,24 +65,12 @@ I want the below response in paragraphs format
 }}
 """
 
-def compare(resume_texts, JD_text, embedding_method='HuggingFace-BERT'):
+def compare(resume_texts, JD_text, embedding_method='Gemini'):
     if embedding_method == 'Gemini':
         response = get_gemini_response(input_prompt.format(text='\n'.join(resume_texts), JD=JD_text))
         return response
-    elif embedding_method == 'HuggingFace-BERT':
-        JD_embeddings = get_HF_embeddings(JD_text)
-        resume_embeddings = [get_HF_embeddings(resume_text) for resume_text in resume_texts]
-         
-        
-    elif embedding_method == 'Doc2Vec':
-        JD_embeddings, resume_embeddings = get_doc2vec_embeddings(JD_text, resume_texts)
-       
     else:
         return "Invalid embedding method selected."
-
-    cos_scores = cosine(resume_embeddings, JD_embeddings)
-    return cos_scores[0]
-
 
 ## streamlit app
 st.title("Resume Parsing and Analysis ")
