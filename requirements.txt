@@ -3,6 +3,7 @@ transformers
 torch
 pdfplumber
 nltk
+scipy==1.12
 gensim
 scikit-learn
 pypdf
