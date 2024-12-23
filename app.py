@@ -78,7 +78,7 @@ st.title("Resume Parsing and Analysis ")
 
 # Define uploaded_file outside the tab selection
 uploaded_file = st.file_uploader(
-    'Choose your resume.pdf file: ', type="pdf", help="Please upload the pdf"
+    'Choose your resume.pdf file: ', type="pdf", help="Please upload the pdf",accept_multiple_files=True
 )
 
 # Tab selection
